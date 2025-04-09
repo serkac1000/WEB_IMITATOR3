@@ -175,7 +175,7 @@ async function predict() {
     expectedPoseEl.textContent = expectedPose;
     currentPoseEl.textContent = bestPose;
     
-    const thresholdPercent = (maxConfidence * 100).toFixed(2);
+    const thresholdPercent = Math.min(100, (maxConfidence / poseThreshold * 100)).toFixed(2);
     confidenceBar.style.width = `${thresholdPercent}%`;
     confidenceText.textContent = `${thresholdPercent}%`;
 
