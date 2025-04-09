@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,14 +69,20 @@
                     <img class="pose-compare" id="pose-compare">
                     <div class="pose-info">
                         <div class="pose-status">
-                            <div class="label">Expected Pose:</div>
-                            <div class="pose-bar" id="expected-pose"></div>
-                            <div class="label">Current Pose:</div>
-                            <div class="pose-bar" id="current-pose-text"></div>
-                            <div class="label">Confidence:</div>
-                            <div class="confidence-container">
-                                <div class="confidence-bar" id="confidence-bar"></div>
-                                <span id="confidence-text">0%</span>
+                            <div>
+                                <span class="label">Expected:</span>
+                                <div class="pose-bar" id="expected-pose"></div>
+                            </div>
+                            <div>
+                                <span class="label">Current:</span>
+                                <div class="pose-bar" id="current-pose-text"></div>
+                            </div>
+                            <div>
+                                <span class="label">Confidence:</span>
+                                <div class="confidence-container">
+                                    <div class="confidence-bar" id="confidence-bar"></div>
+                                    <span id="confidence-text">0%</span>
+                                </div>
                             </div>
                             <div class="timer-box" id="timer-box">3s</div>
                         </div>
