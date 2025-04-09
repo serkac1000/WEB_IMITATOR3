@@ -9,6 +9,11 @@ let poseThreshold = 0.8; // Default 80%
 const poseOrder = ['Pose1', 'Pose2', 'Pose3', 'Pose4', 'Pose5', 'Pose6'];
 
 document.addEventListener('DOMContentLoaded', () => {
+    const savedTimer = localStorage.getItem('pose_timer');
+    if (savedTimer) {
+        document.getElementById('pose-timer').value = savedTimer;
+        poseHoldTimer = parseInt(savedTimer);
+    }
     document.getElementById('start-button').addEventListener('click', startRecognition);
     document.getElementById('back-button').addEventListener('click', showSettingsPage);
     document.getElementById('save-settings').addEventListener('click', saveSettings);
@@ -44,9 +49,12 @@ document.addEventListener('DOMContentLoaded', () => {
 function saveSettings() {
     const modelUrl = document.getElementById('model-url').value;
     const threshold = document.getElementById('pose-threshold').value;
+    const timer = document.getElementById('pose-timer').value;
     localStorage.setItem('model_url', modelUrl);
     localStorage.setItem('pose_threshold', threshold);
+    localStorage.setItem('pose_timer', timer);
     poseThreshold = threshold / 100;
+    poseHoldTimer = parseInt(timer);
 
     poseOrder.forEach(poseName => {
         const poseImage = poseImages.get(poseName);
