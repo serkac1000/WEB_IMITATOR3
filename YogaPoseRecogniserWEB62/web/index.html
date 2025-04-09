@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,34 +29,42 @@
                     <input type="file" id="pose3-image" accept="image/*">
                     <img id="pose3-preview" class="pose-preview">
                 </div>
-                <div class="form-group">
-                    <label>Pose 4 Image:</label>
-                    <input type="file" id="pose4-image" accept="image/*">
-                    <img id="pose4-preview" class="pose-preview">
-                </div>
-                <div class="form-group">
-                    <label>Pose 5 Image:</label>
-                    <input type="file" id="pose5-image" accept="image/*">
-                    <img id="pose5-preview" class="pose-preview">
-                </div>
-                <div class="form-group">
-                    <label>Pose 6 Image:</label>
-                    <input type="file" id="pose6-image" accept="image/*">
-                    <img id="pose6-preview" class="pose-preview">
-                </div>
                 <button id="save-settings">Save Settings</button>
                 <button id="start-button">Start Recognition</button>
             </div>
         </div>
         <div id="recognition-page" class="page">
-            <h1>Yoga Pose Recognition</h1>
-            <div class="video-container">
-                <video id="webcam" playsinline></video>
-                <canvas id="output"></canvas>
-                <img id="current-pose" class="pose-compare">
+            <h1>Pose Recognition</h1>
+            <div class="recognition-container">
+                <div class="webcam-section">
+                    <div class="video-container">
+                        <video id="webcam" playsinline></video>
+                        <canvas id="output"></canvas>
+                    </div>
+                </div>
+                <div class="info-section">
+                    <img id="current-pose" class="pose-compare">
+                    <div class="timer-box" id="timer-box">3s</div>
+                    <div class="pose-info">
+                        <div class="pose-status">
+                            <div class="label">Expected Pose:</div>
+                            <div id="expected-pose" class="pose-bar"></div>
+                        </div>
+                        <div class="pose-status">
+                            <div class="label">Current Pose:</div>
+                            <div id="current-pose-text" class="pose-bar"></div>
+                        </div>
+                        <div class="pose-status">
+                            <div class="label">Confidence:</div>
+                            <div class="confidence-container">
+                                <div id="confidence-bar" class="confidence-bar"></div>
+                                <span id="confidence-text">0%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="back-button">Back to Settings</button>
+                </div>
             </div>
-            <div id="pose-name">Current Pose: None</div>
-            <button id="back-button">Back to Settings</button>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>

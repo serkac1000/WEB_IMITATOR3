@@ -136,6 +136,25 @@ async function predict() {
     currentPose.src = poseImages.get(expectedPose);
     currentPose.style.display = 'block';
 
+    const timerBox = document.getElementById('timer-box');
+    const expectedPoseEl = document.getElementById('expected-pose');
+    const currentPoseEl = document.getElementById('current-pose-text');
+    const confidenceBar = document.getElementById('confidence-bar');
+    const confidenceText = document.getElementById('confidence-text');
+
+    // Update expected pose
+    expectedPoseEl.textContent = expectedPose;
+    expectedPoseEl.className = 'pose-bar' + (bestPose === expectedPose ? ' correct' : '');
+
+    // Update current pose
+    currentPoseEl.textContent = bestPose;
+    currentPoseEl.className = 'pose-bar' + (bestPose === expectedPose ? ' correct' : '');
+
+    // Update confidence
+    const confidencePercent = (maxConfidence * 100).toFixed(2);
+    confidenceBar.style.width = `${confidencePercent}%`;
+    confidenceText.textContent = `${confidencePercent}%`;
+
     if (maxConfidence > 0.5 && bestPose === expectedPose) {
         if (lastPoseTime === 0) {
             lastPoseTime = Date.now();
@@ -147,16 +166,15 @@ async function predict() {
             lastPoseTime = 0;
         }
 
-        // Color code the timer background
-        const timerColor = holdTime === 3 ? '#ff0000' : 
-                          holdTime === 2 ? '#ff6600' : 
-                          holdTime === 1 ? '#99cc00' : '#00cc00';
-
-        labelContainer.style.backgroundColor = timerColor;
-        labelContainer.textContent = `Current Pose: ${bestPose}\nConfidence: ${(maxConfidence * 100).toFixed(2)}%\nHold for: ${Math.max(0, holdTime)}s`;
+        // Update timer box
+        timerBox.textContent = `${Math.max(0, holdTime)}s`;
+        timerBox.style.backgroundColor = holdTime === 3 ? '#ff4444' : 
+                                       holdTime === 2 ? '#ff6600' : 
+                                       holdTime === 1 ? '#99cc00' : '#4CAF50';
     } else {
         lastPoseTime = 0;
-        labelContainer.textContent = `Expected Pose: ${expectedPose}\nCurrent Pose: ${bestPose}\nConfidence: ${(maxConfidence * 100).toFixed(2)}%`;
+        timerBox.textContent = '3s';
+        timerBox.style.backgroundColor = '#ff4444';
     }
 }
 
