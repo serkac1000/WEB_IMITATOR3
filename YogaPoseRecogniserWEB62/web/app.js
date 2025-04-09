@@ -1,3 +1,4 @@
+
 let model, webcam, ctx, labelContainer, maxPredictions;
 const poseImages = new Map();
 let currentPoseImage = null;
@@ -6,17 +7,14 @@ let poseHoldTimer = 3;
 let lastPoseTime = 0;
 const poseOrder = ['Pose1', 'Pose2', 'Pose3', 'Pose4', 'Pose5', 'Pose6'];
 
-// Event Listeners
 document.getElementById('start-button').addEventListener('click', startRecognition);
 document.getElementById('back-button').addEventListener('click', showSettingsPage);
 document.getElementById('save-settings').addEventListener('click', saveSettings);
 
 function saveSettings() {
-    // Save model URL
     const modelUrl = document.getElementById('model-url').value;
     localStorage.setItem('model_url', modelUrl);
     
-    // Save all pose images
     poseOrder.forEach(poseName => {
         const poseImage = poseImages.get(poseName);
         if (poseImage) {
@@ -26,6 +24,7 @@ function saveSettings() {
     
     alert('Settings saved successfully!');
 }
+
 document.getElementById('pose1-image').addEventListener('change', (e) => handleImageUpload(e, 'Pose1'));
 document.getElementById('pose2-image').addEventListener('change', (e) => handleImageUpload(e, 'Pose2'));
 document.getElementById('pose3-image').addEventListener('change', (e) => handleImageUpload(e, 'Pose3'));
@@ -49,13 +48,11 @@ function handleImageUpload(event, poseName) {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    // Load saved model URL
     const savedModelUrl = localStorage.getItem('model_url');
     if (savedModelUrl) {
         document.getElementById('model-url').value = savedModelUrl;
     }
     
-    // Load saved pose images
     poseOrder.forEach(poseName => {
         const savedImage = localStorage.getItem(`pose_${poseName}`);
         if (savedImage) {
@@ -195,7 +192,7 @@ function drawPose(pose) {
         }
     }
 
-    // Draw keypoints
+    // Draw small dots at keypoints
     for (let keypoint of pose.keypoints) {
         if (keypoint.score > 0.2) {
             ctx.beginPath();
