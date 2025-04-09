@@ -58,22 +58,23 @@
                         <canvas id="output"></canvas>
                     </div>
                 </div>
-                <div class="side-panel">
-                    <div class="pose-preview-container">
-                        <div class="pose-preview">
-                            <h3>Current Pose</h3>
-                            <img id="current-pose" class="pose-image">
-                        </div>
-                        <div class="pose-preview">
-                            <h3>Next Pose</h3>
-                            <img id="next-pose" class="pose-image">
-                        </div>
-                    </div>
+                <div class="status-container">
                     <div class="timer-box" id="timer-box">3s</div>
-                    <div class="progress-bars">
-                        <div class="confidence-bar-container">
-                            <div class="confidence-bar" id="confidence-bar"></div>
-                            <span id="confidence-text">0%</span>
+                    <div class="pose-bars">
+                        <div class="expected-pose">
+                            <span>Expected:</span>
+                            <div class="pose-bar" id="expected-pose">Pose2</div>
+                        </div>
+                        <div class="current-pose">
+                            <span>Current Pose:</span>
+                            <div class="pose-bar" id="current-pose-text">Pose1</div>
+                        </div>
+                        <div class="confidence">
+                            <span>Confidence:</span>
+                            <div class="confidence-container">
+                                <div class="confidence-bar" id="confidence-bar"></div>
+                                <span id="confidence-text">83.1%</span>
+                            </div>
                         </div>
                     </div>
                     <button id="back-button">Back to Settings</button>

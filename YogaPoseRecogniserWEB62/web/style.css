@@ -21,22 +21,39 @@ body {
 
 .recognition-container {
     display: flex;
+    flex-direction: column;
     height: 100vh;
     background: #000;
 }
 
 .webcam-section {
     flex: 1;
-    height: 100%;
+    position: relative;
 }
 
-.side-panel {
-    width: 300px;
+.status-container {
     background: #fff;
-    padding: 20px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
+}
+
+.pose-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.expected-pose, .current-pose, .confidence {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.expected-pose span, .current-pose span, .confidence span {
+    min-width: 100px;
+    font-weight: bold;
 }
 
 .video-container {
