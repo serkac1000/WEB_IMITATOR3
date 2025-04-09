@@ -1,4 +1,3 @@
-
 let model, webcam, ctx, labelContainer, maxPredictions;
 const poseImages = new Map();
 let currentPoseImage = null;
@@ -14,14 +13,14 @@ document.getElementById('save-settings').addEventListener('click', saveSettings)
 function saveSettings() {
     const modelUrl = document.getElementById('model-url').value;
     localStorage.setItem('model_url', modelUrl);
-    
+
     poseOrder.forEach(poseName => {
         const poseImage = poseImages.get(poseName);
         if (poseImage) {
             localStorage.setItem(`pose_${poseName}`, poseImage);
         }
     });
-    
+
     alert('Settings saved successfully!');
 }
 
@@ -52,7 +51,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if (savedModelUrl) {
         document.getElementById('model-url').value = savedModelUrl;
     }
-    
+
     poseOrder.forEach(poseName => {
         const savedImage = localStorage.getItem(`pose_${poseName}`);
         if (savedImage) {
@@ -189,16 +188,6 @@ function drawPose(pose) {
             ctx.moveTo(startPoint.position.x, startPoint.position.y);
             ctx.lineTo(endPoint.position.x, endPoint.position.y);
             ctx.stroke();
-        }
-    }
-
-    // Draw small dots at keypoints
-    for (let keypoint of pose.keypoints) {
-        if (keypoint.score > 0.2) {
-            ctx.beginPath();
-            ctx.arc(keypoint.position.x, keypoint.position.y, 3, 0, 2 * Math.PI);
-            ctx.fillStyle = 'red';
-            ctx.fill();
         }
     }
 }
