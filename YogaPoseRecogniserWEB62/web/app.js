@@ -121,7 +121,7 @@ async function init(URL) {
     model = await tmPose.load(modelURL, metadataURL);
     maxPredictions = model.getTotalClasses();
 
-    const size = 640;
+    const size = 360;
     const flip = true;
     webcam = new tmPose.Webcam(size, size, flip);
     await webcam.setup();
