@@ -3,6 +3,7 @@ body {
     padding: 20px;
     font-family: Arial, sans-serif;
     background: #f0f0f0;
+    font-size: 16px; /* Added font size for better readability */
 }
 
 .container {
@@ -52,6 +53,7 @@ body {
 .expected-pose span, .current-pose span, .confidence span {
     min-width: 100px;
     font-weight: bold;
+    font-size: 14px; /* Reduced font size */
 }
 
 .video-container {
@@ -74,6 +76,7 @@ body {
 .pose-preview h3 {
     margin: 0 0 10px 0;
     color: #333;
+    font-size: 16px; /* Reduced font size */
 }
 
 .pose-image {
@@ -105,7 +108,7 @@ video, canvas {
     background: #ff4444;
     color: white;
     padding: 5px 10px;
-    font-size: 20px;
+    font-size: 18px; /* Reduced font size */
     border-radius: 5px;
     text-align: center;
     width: fit-content;
@@ -122,23 +125,26 @@ video, canvas {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     height: calc(40% - 60px);
     overflow: auto;
+    font-size: 14px; /* Reduced font size */
 }
 
 .pose-status {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .label {
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
+    font-size: 14px;
 }
 
 .pose-bar {
     background: #ff4444;
     color: white;
-    padding: 8px;
+    padding: 4px 8px;
     border-radius: 4px;
-    margin-top: 5px;
+    margin-top: 2px;
+    font-size: 14px;
 }
 
 .pose-bar.correct {
@@ -148,9 +154,9 @@ video, canvas {
 .confidence-container {
     background: #f0f0f0;
     border-radius: 4px;
-    height: 30px;
+    height: 20px;
     position: relative;
-    margin-top: 5px;
+    margin-top: 2px;
 }
 
 .confidence-bar {
@@ -167,11 +173,12 @@ video, canvas {
     top: 50%;
     transform: translateY(-50%);
     color: black;
+    font-size: 12px; /* Reduced font size */
 }
 
 button {
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 8px 16px; /* Reduced padding */
+    font-size: 14px; /* Reduced font size */
     background: #4CAF50;
     color: white;
     border: none;
@@ -189,6 +196,7 @@ button:hover {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    font-size: 14px; /* Reduced font size */
 }
 
 .pose-grid {
@@ -201,6 +209,7 @@ button:hover {
 .form-group {
     margin: 0;
     text-align: left;
+    font-size: 14px; /* Reduced font size */
 }
 
 .form-group label {
@@ -213,6 +222,7 @@ button:hover {
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    font-size: 14px; /* Reduced font size */
 }
 
 .pose-preview {
