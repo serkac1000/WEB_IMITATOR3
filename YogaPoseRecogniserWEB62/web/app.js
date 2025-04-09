@@ -146,13 +146,13 @@ async function predict() {
     confidenceBar.style.width = `${confidencePercent}%`;
     confidenceText.textContent = `${confidencePercent}%`;
 
-    if (maxConfidence > 0.8 && bestPose === expectedPose) {
-        if (lastPoseTime === 0) {
+    if (maxConfidence > 0.8) {
+        if (bestPose === expectedPose && lastPoseTime === 0) {
             lastPoseTime = Date.now();
         }
         const holdTime = 3 - Math.floor((Date.now() - lastPoseTime) / 1000);
 
-        if (holdTime <= 0) {
+        if (holdTime <= 0 && bestPose === expectedPose) {
             currentPoseIndex = (currentPoseIndex + 1) % poseOrder.length;
             lastPoseTime = 0;
         }
