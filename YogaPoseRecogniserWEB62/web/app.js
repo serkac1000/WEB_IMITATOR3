@@ -155,39 +155,41 @@ async function predict() {
 }
 
 function drawPose(pose) {
-    // Define the connections between keypoints for skeleton
-    const connections = [
-        ['nose', 'left_eye'], ['nose', 'right_eye'],
-        ['left_eye', 'left_ear'], ['right_eye', 'right_ear'],
-        ['nose', 'left_shoulder'], ['nose', 'right_shoulder'],
-        ['left_shoulder', 'right_shoulder'],
-        ['left_shoulder', 'left_elbow'], ['right_shoulder', 'right_elbow'],
-        ['left_elbow', 'left_wrist'], ['right_elbow', 'right_wrist'],
-        ['left_shoulder', 'left_hip'], ['right_shoulder', 'right_hip'],
-        ['left_hip', 'right_hip'],
-        ['left_hip', 'left_knee'], ['right_hip', 'right_knee'],
-        ['left_knee', 'left_ankle'], ['right_knee', 'right_ankle']
+    if (!pose || !pose.keypoints) return;
+
+    // Draw lines connecting keypoints
+    const skeleton = [
+        ['nose', 'leftEye'], ['nose', 'rightEye'],
+        ['leftEye', 'leftEar'], ['rightEye', 'rightEar'],
+        ['leftShoulder', 'rightShoulder'],
+        ['leftShoulder', 'leftElbow'], ['rightShoulder', 'rightElbow'],
+        ['leftElbow', 'leftWrist'], ['rightElbow', 'rightWrist'],
+        ['leftShoulder', 'leftHip'], ['rightShoulder', 'rightHip'],
+        ['leftHip', 'rightHip'],
+        ['leftHip', 'leftKnee'], ['rightHip', 'rightKnee'],
+        ['leftKnee', 'leftAnkle'], ['rightKnee', 'rightAnkle']
     ];
 
-    // Create keypoint dictionary for easier lookup
-    const keypointDict = {};
-    for (let keypoint of pose.keypoints) {
-        keypointDict[keypoint.name] = keypoint;
-    }
+    // Create a map for quick keypoint lookup
+    const keypointMap = {};
+    pose.keypoints.forEach(keypoint => {
+        keypointMap[keypoint.name] = keypoint;
+    });
 
-    // Draw the skeleton lines
+    // Set line style
     ctx.strokeStyle = '#00ff00';
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 3;
 
-    for (let [start, end] of connections) {
-        const startPoint = keypointDict[start];
-        const endPoint = keypointDict[end];
+    // Draw the skeleton
+    skeleton.forEach(([start, end]) => {
+        const startPoint = keypointMap[start];
+        const endPoint = keypointMap[end];
 
-        if (startPoint && endPoint && startPoint.score > 0.2 && endPoint.score > 0.2) {
+        if (startPoint && endPoint && startPoint.score > 0.3 && endPoint.score > 0.3) {
             ctx.beginPath();
             ctx.moveTo(startPoint.position.x, startPoint.position.y);
             ctx.lineTo(endPoint.position.x, endPoint.position.y);
             ctx.stroke();
         }
-    }
+    });
 }
