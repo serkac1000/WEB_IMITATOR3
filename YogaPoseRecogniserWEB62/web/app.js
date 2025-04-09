@@ -157,12 +157,28 @@ async function predict() {
 function drawPose(pose) {
     if (!pose || !pose.keypoints) return;
 
-    for (let keypoint of pose.keypoints) {
-        if (keypoint.score > 0.3) {
+    ctx.strokeStyle = '#00ff00';
+    ctx.lineWidth = 2;
+
+    const connections = [
+        [5, 7], [7, 9],     // Left arm
+        [6, 8], [8, 10],    // Right arm
+        [5, 6],             // Shoulders
+        [5, 11], [6, 12],   // Torso
+        [11, 12],           // Hips
+        [11, 13], [13, 15], // Left leg
+        [12, 14], [14, 16]  // Right leg
+    ];
+
+    for (const [i1, i2] of connections) {
+        const point1 = pose.keypoints[i1];
+        const point2 = pose.keypoints[i2];
+
+        if (point1.score > 0.3 && point2.score > 0.3) {
             ctx.beginPath();
-            ctx.arc(keypoint.position.x, keypoint.position.y, 5, 0, 2 * Math.PI);
-            ctx.fillStyle = '#00ff00';
-            ctx.fill();
+            ctx.moveTo(point1.position.x, point1.position.y);
+            ctx.lineTo(point2.position.x, point2.position.y);
+            ctx.stroke();
         }
     }
 }
