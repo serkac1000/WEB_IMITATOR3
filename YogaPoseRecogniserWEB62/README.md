@@ -23,7 +23,7 @@ cd YogaPoseRecogniserWEB6
 
 3. Start a local server:
 ```bash
-python3 -m http.server 5000 --bind 0.0.0.0
+python server.py
 ```
 
 4. Open your browser and visit:
