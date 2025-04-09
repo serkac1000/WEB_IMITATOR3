@@ -129,6 +129,10 @@ async function predict() {
 
     const expectedPose = poseOrder[currentPoseIndex];
     
+    // Update pose image
+    const poseCompare = document.getElementById('pose-compare');
+    poseCompare.src = poseImages.get(expectedPose);
+    
     const timerBox = document.getElementById('timer-box');
     const expectedPoseEl = document.getElementById('expected-pose');
     const currentPoseEl = document.getElementById('current-pose-text');
