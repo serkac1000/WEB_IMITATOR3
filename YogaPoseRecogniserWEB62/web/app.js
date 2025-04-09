@@ -132,9 +132,14 @@ async function predict() {
     }
 
     const expectedPose = poseOrder[currentPoseIndex];
-    const currentPose = document.getElementById('current-pose');
-    currentPose.src = poseImages.get(expectedPose);
-    currentPose.style.display = 'block';
+    const nextPoseIndex = (currentPoseIndex + 1) % poseOrder.length;
+    const nextPose = poseOrder[nextPoseIndex];
+    
+    const currentPoseImg = document.getElementById('current-pose');
+    const nextPoseImg = document.getElementById('next-pose');
+    
+    currentPoseImg.src = poseImages.get(expectedPose);
+    nextPoseImg.src = poseImages.get(nextPose);
 
     const timerBox = document.getElementById('timer-box');
     const expectedPoseEl = document.getElementById('expected-pose');

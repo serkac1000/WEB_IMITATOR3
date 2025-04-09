@@ -51,7 +51,6 @@
             </div>
         </div>
         <div id="recognition-page" class="page">
-            <h1>Pose Recognition</h1>
             <div class="recognition-container">
                 <div class="webcam-section">
                     <div class="video-container">
@@ -59,24 +58,22 @@
                         <canvas id="output"></canvas>
                     </div>
                 </div>
-                <div class="info-section">
-                    <img id="current-pose" class="pose-compare">
+                <div class="side-panel">
+                    <div class="pose-preview-container">
+                        <div class="pose-preview">
+                            <h3>Current Pose</h3>
+                            <img id="current-pose" class="pose-image">
+                        </div>
+                        <div class="pose-preview">
+                            <h3>Next Pose</h3>
+                            <img id="next-pose" class="pose-image">
+                        </div>
+                    </div>
                     <div class="timer-box" id="timer-box">3s</div>
-                    <div class="pose-info">
-                        <div class="pose-status">
-                            <div class="label">Expected Pose:</div>
-                            <div id="expected-pose" class="pose-bar"></div>
-                        </div>
-                        <div class="pose-status">
-                            <div class="label">Current Pose:</div>
-                            <div id="current-pose-text" class="pose-bar"></div>
-                        </div>
-                        <div class="pose-status">
-                            <div class="label">Confidence:</div>
-                            <div class="confidence-container">
-                                <div id="confidence-bar" class="confidence-bar"></div>
-                                <span id="confidence-text">0%</span>
-                            </div>
+                    <div class="progress-bars">
+                        <div class="confidence-bar-container">
+                            <div class="confidence-bar" id="confidence-bar"></div>
+                            <span id="confidence-text">0%</span>
                         </div>
                     </div>
                     <button id="back-button">Back to Settings</button>
