@@ -102,9 +102,9 @@ video, canvas {
 }
 
 .pose-compare {
-    width: 100%;
-    height: 85%;
-    object-fit: cover;
+    width: 240px;
+    height: 240px;
+    object-fit: contain;
     border: 1px solid #ddd;
     background: #fff;
     margin-bottom: 3px;
@@ -249,5 +249,5 @@ button:hover {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    max-width: 400px;
+    max-width: 280px;
 }
