@@ -1,3 +1,4 @@
+
 let model, webcam, ctx, labelContainer, maxPredictions;
 const poseImages = new Map();
 let currentPoseImage = null;
@@ -6,47 +7,17 @@ let poseHoldTimer = 3;
 let lastPoseTime = 0;
 const poseOrder = ['Pose1', 'Pose2', 'Pose3', 'Pose4', 'Pose5', 'Pose6'];
 
-document.getElementById('start-button').addEventListener('click', startRecognition);
-document.getElementById('back-button').addEventListener('click', showSettingsPage);
-document.getElementById('save-settings').addEventListener('click', saveSettings);
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('start-button').addEventListener('click', startRecognition);
+    document.getElementById('back-button').addEventListener('click', showSettingsPage);
+    document.getElementById('save-settings').addEventListener('click', saveSettings);
 
-function saveSettings() {
-    const modelUrl = document.getElementById('model-url').value;
-    localStorage.setItem('model_url', modelUrl);
-
-    poseOrder.forEach(poseName => {
-        const poseImage = poseImages.get(poseName);
-        if (poseImage) {
-            localStorage.setItem(`pose_${poseName}`, poseImage);
-        }
+    poseOrder.forEach((poseName, index) => {
+        document.getElementById(`${poseName.toLowerCase()}-image`)
+            .addEventListener('change', (e) => handleImageUpload(e, poseName));
     });
 
-    alert('Settings saved successfully!');
-}
-
-document.getElementById('pose1-image').addEventListener('change', (e) => handleImageUpload(e, 'Pose1'));
-document.getElementById('pose2-image').addEventListener('change', (e) => handleImageUpload(e, 'Pose2'));
-document.getElementById('pose3-image').addEventListener('change', (e) => handleImageUpload(e, 'Pose3'));
-document.getElementById('pose4-image').addEventListener('change', (e) => handleImageUpload(e, 'Pose4'));
-document.getElementById('pose5-image').addEventListener('change', (e) => handleImageUpload(e, 'Pose5'));
-document.getElementById('pose6-image').addEventListener('change', (e) => handleImageUpload(e, 'Pose6'));
-
-function handleImageUpload(event, poseName) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const preview = document.getElementById(`${poseName.toLowerCase()}-preview`);
-            preview.src = e.target.result;
-            preview.style.display = 'block';
-            poseImages.set(poseName, e.target.result);
-            localStorage.setItem(`pose_${poseName}`, e.target.result);
-        };
-        reader.readAsDataURL(file);
-    }
-}
-
-window.addEventListener('DOMContentLoaded', () => {
+    // Load saved settings
     const savedModelUrl = localStorage.getItem('model_url');
     if (savedModelUrl) {
         document.getElementById('model-url').value = savedModelUrl;
@@ -62,6 +33,32 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+function saveSettings() {
+    const modelUrl = document.getElementById('model-url').value;
+    localStorage.setItem('model_url', modelUrl);
+
+    poseOrder.forEach(poseName => {
+        const poseImage = poseImages.get(poseName);
+        if (poseImage) {
+            localStorage.setItem(`pose_${poseName}`, poseImage);
+        }
+    });
+}
+
+function handleImageUpload(event, poseName) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const preview = document.getElementById(`${poseName.toLowerCase()}-preview`);
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+            poseImages.set(poseName, e.target.result);
+        };
+        reader.readAsDataURL(file);
+    }
+}
 
 function showSettingsPage() {
     document.getElementById('recognition-page').classList.remove('active');
@@ -97,9 +94,8 @@ async function init(URL) {
     await webcam.setup();
     await webcam.play();
 
-    canvas = document.getElementById('output');
+    const canvas = document.getElementById('output');
     ctx = canvas.getContext('2d');
-    labelContainer = document.getElementById('pose-name');
 
     canvas.width = size;
     canvas.height = size;
@@ -132,35 +128,21 @@ async function predict() {
     }
 
     const expectedPose = poseOrder[currentPoseIndex];
-    const nextPoseIndex = (currentPoseIndex + 1) % poseOrder.length;
-    const nextPose = poseOrder[nextPoseIndex];
     
-    const currentPoseImg = document.getElementById('current-pose');
-    const nextPoseImg = document.getElementById('next-pose');
-    
-    currentPoseImg.src = poseImages.get(expectedPose);
-    nextPoseImg.src = poseImages.get(nextPose);
-
     const timerBox = document.getElementById('timer-box');
     const expectedPoseEl = document.getElementById('expected-pose');
     const currentPoseEl = document.getElementById('current-pose-text');
     const confidenceBar = document.getElementById('confidence-bar');
     const confidenceText = document.getElementById('confidence-text');
 
-    // Update expected pose
     expectedPoseEl.textContent = expectedPose;
-    expectedPoseEl.className = 'pose-bar' + (bestPose === expectedPose ? ' correct' : '');
-
-    // Update current pose
     currentPoseEl.textContent = bestPose;
-    currentPoseEl.className = 'pose-bar' + (bestPose === expectedPose ? ' correct' : '');
-
-    // Update confidence
+    
     const confidencePercent = (maxConfidence * 100).toFixed(2);
     confidenceBar.style.width = `${confidencePercent}%`;
     confidenceText.textContent = `${confidencePercent}%`;
 
-    if (maxConfidence > 0.5 && bestPose === expectedPose) {
+    if (maxConfidence > 0.8 && bestPose === expectedPose) {
         if (lastPoseTime === 0) {
             lastPoseTime = Date.now();
         }
@@ -171,11 +153,11 @@ async function predict() {
             lastPoseTime = 0;
         }
 
-        // Update timer box
         timerBox.textContent = `${Math.max(0, holdTime)}s`;
-        timerBox.style.backgroundColor = holdTime === 3 ? '#ff4444' : 
-                                       holdTime === 2 ? '#ff6600' : 
-                                       holdTime === 1 ? '#99cc00' : '#4CAF50';
+        timerBox.style.backgroundColor = 
+            holdTime === 3 ? '#ff4444' : 
+            holdTime === 2 ? '#ff6600' : 
+            holdTime === 1 ? '#99cc00' : '#4CAF50';
     } else {
         lastPoseTime = 0;
         timerBox.textContent = '3s';
