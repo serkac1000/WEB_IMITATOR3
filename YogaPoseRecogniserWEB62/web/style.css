@@ -78,7 +78,7 @@ body {
 
 .pose-image {
     width: 100%;
-    height: 150px;
+    height: 200px; /* Increased height */
     object-fit: contain;
     border: 2px solid #ddd;
     border-radius: 5px;
@@ -94,11 +94,11 @@ video, canvas {
 
 .pose-compare {
     width: 100%;
-    height: 40%;
+    height: 50%;
     object-fit: contain;
     border: 2px solid #ddd;
     background: #fff;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
 }
 
 .timer-box {
@@ -109,7 +109,10 @@ video, canvas {
     border-radius: 5px;
     text-align: center;
     width: fit-content;
-    margin: 5px 0;
+    margin: 10px 0;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
 }
 
 .pose-info {
@@ -117,7 +120,7 @@ video, canvas {
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    height: calc(60% - 80px);
+    height: calc(50% - 80px);
     overflow: auto;
 }
 
