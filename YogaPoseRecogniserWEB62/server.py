@@ -48,6 +48,8 @@ else:
     basedir = os.path.dirname(__file__)
 
 web_dir = os.path.join(basedir, 'web')
+if not os.path.exists(web_dir):
+    web_dir = os.path.dirname(__file__)
 try:
     os.chdir(web_dir)
     print(f"Changed working directory to: {os.getcwd()}")
