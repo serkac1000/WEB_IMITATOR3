@@ -55,6 +55,7 @@ function saveSettings() {
     localStorage.setItem('pose_timer', timer);
     poseThreshold = threshold / 100;
     poseHoldTimer = parseInt(timer);
+    showSaveConfirmation();
 
     poseOrder.forEach(poseName => {
         const poseImage = poseImages.get(poseName);
@@ -70,12 +71,25 @@ function handleImageUpload(event, poseName) {
         const reader = new FileReader();
         reader.onload = function(e) {
             const preview = document.getElementById(`${poseName.toLowerCase()}-preview`);
+            const label = event.target.parentElement.querySelector('label');
             preview.src = e.target.result;
             preview.style.display = 'block';
             poseImages.set(poseName, e.target.result);
+            label.textContent = `${poseName} Image: ${file.name}`;
         };
         reader.readAsDataURL(file);
     }
+}
+
+function showSaveConfirmation() {
+    const saveButton = document.getElementById('save-settings');
+    const originalText = saveButton.textContent;
+    saveButton.textContent = 'Settings Saved!';
+    saveButton.style.backgroundColor = '#45a049';
+    setTimeout(() => {
+        saveButton.textContent = originalText;
+        saveButton.style.backgroundColor = '#4CAF50';
+    }, 2000);
 }
 
 function showSettingsPage() {
@@ -168,7 +182,7 @@ async function predict() {
         if (lastPoseTime === 0) {
             lastPoseTime = Date.now();
         }
-        const holdTime = 3 - Math.floor((Date.now() - lastPoseTime) / 1000);
+        const holdTime = poseHoldTimer - Math.floor((Date.now() - lastPoseTime) / 1000);
 
         if (holdTime <= 0) {
             currentPoseIndex = (currentPoseIndex + 1) % poseOrder.length;
@@ -179,7 +193,7 @@ async function predict() {
         }
     } else {
         lastPoseTime = 0;
-        timerBox.textContent = '3s';
+        timerBox.textContent = `${poseHoldTimer}s`;
         timerBox.style.backgroundColor = '#ff4444';
     }
 }
