@@ -106,6 +106,7 @@ async function startRecognition() {
         return;
     }
 
+    currentPoseIndex = 0; // Reset to start from pose 1
     document.getElementById('settings-page').classList.remove('active');
     document.getElementById('recognition-page').classList.add('active');
 
