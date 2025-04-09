@@ -160,6 +160,17 @@ function drawPose(pose) {
     ctx.strokeStyle = '#00ff00';
     ctx.lineWidth = 2;
 
+    // Draw keypoints for head
+    for (let i = 0; i < 5; i++) {
+        const point = pose.keypoints[i];
+        if (point.score > 0.3) {
+            ctx.beginPath();
+            ctx.arc(point.position.x, point.position.y, 4, 0, 2 * Math.PI);
+            ctx.fillStyle = '#00ff00';
+            ctx.fill();
+        }
+    }
+
     const connections = [
         [5, 7], [7, 9],     // Left arm
         [6, 8], [8, 10],    // Right arm
@@ -167,7 +178,9 @@ function drawPose(pose) {
         [5, 11], [6, 12],   // Torso
         [11, 12],           // Hips
         [11, 13], [13, 15], // Left leg
-        [12, 14], [14, 16]  // Right leg
+        [12, 14], [14, 16], // Right leg
+        [0, 1], [1, 2],     // Face
+        [2, 3], [3, 4]      // Face
     ];
 
     for (const [i1, i2] of connections) {
