@@ -146,22 +146,19 @@ async function predict() {
     confidenceBar.style.width = `${confidencePercent}%`;
     confidenceText.textContent = `${confidencePercent}%`;
 
-    if (maxConfidence > 0.8) {
-        if (bestPose === expectedPose && lastPoseTime === 0) {
+    if (maxConfidence > 0.8 && bestPose === expectedPose) {
+        if (lastPoseTime === 0) {
             lastPoseTime = Date.now();
         }
         const holdTime = 3 - Math.floor((Date.now() - lastPoseTime) / 1000);
 
-        if (holdTime <= 0 && bestPose === expectedPose) {
+        if (holdTime <= 0) {
             currentPoseIndex = (currentPoseIndex + 1) % poseOrder.length;
             lastPoseTime = 0;
+        } else {
+            timerBox.textContent = `${Math.max(0, holdTime)}s`;
+            timerBox.style.backgroundColor = '#4CAF50';
         }
-
-        timerBox.textContent = `${Math.max(0, holdTime)}s`;
-        timerBox.style.backgroundColor = 
-            holdTime === 3 ? '#ff4444' : 
-            holdTime === 2 ? '#ff6600' : 
-            holdTime === 1 ? '#99cc00' : '#4CAF50';
     } else {
         lastPoseTime = 0;
         timerBox.textContent = '3s';
