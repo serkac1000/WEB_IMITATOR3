@@ -100,11 +100,11 @@ video, canvas {
 
 .pose-compare {
     width: 100%;
-    height: 70%;
-    object-fit: cover;
+    height: 65%;
+    object-fit: contain;
     border: 1px solid #ddd;
     background: #fff;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 
 .timer-box {
@@ -123,10 +123,10 @@ video, canvas {
 
 .pose-info {
     background: white;
-    padding: 5px;
-    border-radius: 5px;
+    padding: 4px;
+    border-radius: 4px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    font-size: 11px;
+    font-size: 10px;
     margin-top: auto;
 }
 
@@ -138,19 +138,19 @@ video, canvas {
 
 .label {
     font-weight: bold;
-    font-size: 12px;
+    font-size: 10px;
     display: inline-block;
-    width: 100px;
+    width: 80px;
 }
 
 .pose-bar {
     display: inline-block;
     background: #ff4444;
     color: white;
-    padding: 2px 6px;
+    padding: 2px 4px;
     border-radius: 3px;
-    font-size: 12px;
-    width: 60px;
+    font-size: 10px;
+    width: 50px;
     text-align: center;
 }
 
@@ -245,6 +245,6 @@ button:hover {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    max-width: 250px;
+    gap: 3px;
+    max-width: 200px;
 }
