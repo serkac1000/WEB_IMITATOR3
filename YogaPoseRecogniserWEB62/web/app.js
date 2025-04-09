@@ -157,36 +157,33 @@ async function predict() {
 function drawPose(pose) {
     if (!pose || !pose.keypoints) return;
 
-    const skeleton = [
-        ['nose', 'leftEye'],
-        ['nose', 'rightEye'],
-        ['leftEye', 'leftEar'],
-        ['rightEye', 'rightEar'],
-        ['leftShoulder', 'rightShoulder'],
-        ['leftShoulder', 'leftElbow'],
-        ['rightShoulder', 'rightElbow'],
-        ['leftElbow', 'leftWrist'],
-        ['rightElbow', 'rightWrist'],
-        ['leftShoulder', 'leftHip'],
-        ['rightShoulder', 'rightHip'],
-        ['leftHip', 'rightHip'],
-        ['leftHip', 'leftKnee'],
-        ['rightHip', 'rightKnee'],
-        ['leftKnee', 'leftAnkle'],
-        ['rightKnee', 'rightAnkle']
+    ctx.strokeStyle = '#00ff00';
+    ctx.lineWidth = 2;
+
+    // Draw lines between keypoints
+    const pairs = [
+        [5, 6],   // shoulders
+        [5, 7],   // left upper arm
+        [7, 9],   // left lower arm
+        [6, 8],   // right upper arm
+        [8, 10],  // right lower arm
+        [5, 11],  // left torso
+        [6, 12],  // right torso
+        [11, 12], // hips
+        [11, 13], // left thigh
+        [13, 15], // left calf
+        [12, 14], // right thigh
+        [14, 16]  // right calf
     ];
 
-    ctx.strokeStyle = '#00ff00';
-    ctx.lineWidth = 3;
+    for (const [p1, p2] of pairs) {
+        const point1 = pose.keypoints[p1];
+        const point2 = pose.keypoints[p2];
 
-    for (let [p1, p2] of skeleton) {
-        const point1 = pose.keypoints.find(kp => kp.name === p1);
-        const point2 = pose.keypoints.find(kp => kp.name === p2);
-
-        if (point1 && point2 && point1.score > 0.3 && point2.score > 0.3) {
+        if (point1.score > 0.3 && point2.score > 0.3) {
             ctx.beginPath();
-            ctx.moveTo(point1.position.x, point1.position.y);
-            ctx.lineTo(point2.position.x, point2.position.y);
+            ctx.moveTo(point1.x, point1.y);
+            ctx.lineTo(point2.x, point2.y);
             ctx.stroke();
         }
     }
