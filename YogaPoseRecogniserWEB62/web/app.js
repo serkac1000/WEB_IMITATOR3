@@ -147,6 +147,12 @@ async function predict() {
             lastPoseTime = 0;
         }
 
+        // Color code the timer background
+        const timerColor = holdTime === 3 ? '#ff0000' : 
+                          holdTime === 2 ? '#ff6600' : 
+                          holdTime === 1 ? '#99cc00' : '#00cc00';
+
+        labelContainer.style.backgroundColor = timerColor;
         labelContainer.textContent = `Current Pose: ${bestPose}\nConfidence: ${(maxConfidence * 100).toFixed(2)}%\nHold for: ${Math.max(0, holdTime)}s`;
     } else {
         lastPoseTime = 0;
