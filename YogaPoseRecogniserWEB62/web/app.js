@@ -157,39 +157,33 @@ async function predict() {
 function drawPose(pose) {
     if (!pose || !pose.keypoints) return;
 
-    // Draw lines connecting keypoints
-    const skeleton = [
-        ['nose', 'leftEye'], ['nose', 'rightEye'],
-        ['leftEye', 'leftEar'], ['rightEye', 'rightEar'],
+    const connections = [
         ['leftShoulder', 'rightShoulder'],
-        ['leftShoulder', 'leftElbow'], ['rightShoulder', 'rightElbow'],
-        ['leftElbow', 'leftWrist'], ['rightElbow', 'rightWrist'],
-        ['leftShoulder', 'leftHip'], ['rightShoulder', 'rightHip'],
+        ['leftShoulder', 'leftHip'],
+        ['rightShoulder', 'rightHip'],
         ['leftHip', 'rightHip'],
-        ['leftHip', 'leftKnee'], ['rightHip', 'rightKnee'],
-        ['leftKnee', 'leftAnkle'], ['rightKnee', 'rightAnkle']
+        ['leftShoulder', 'leftElbow'],
+        ['leftElbow', 'leftWrist'],
+        ['rightShoulder', 'rightElbow'],
+        ['rightElbow', 'rightWrist'],
+        ['leftHip', 'leftKnee'],
+        ['leftKnee', 'leftAnkle'],
+        ['rightHip', 'rightKnee'],
+        ['rightKnee', 'rightAnkle']
     ];
 
-    // Create a map for quick keypoint lookup
-    const keypointMap = {};
-    pose.keypoints.forEach(keypoint => {
-        keypointMap[keypoint.name] = keypoint;
-    });
-
-    // Set line style
     ctx.strokeStyle = '#00ff00';
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 4;
 
-    // Draw the skeleton
-    skeleton.forEach(([start, end]) => {
-        const startPoint = keypointMap[start];
-        const endPoint = keypointMap[end];
+    for (let [p1, p2] of connections) {
+        const point1 = pose.keypoints.find(kp => kp.name === p1);
+        const point2 = pose.keypoints.find(kp => kp.name === p2);
 
-        if (startPoint && endPoint && startPoint.score > 0.3 && endPoint.score > 0.3) {
+        if (point1 && point2 && point1.score > 0.2 && point2.score > 0.2) {
             ctx.beginPath();
-            ctx.moveTo(startPoint.position.x, startPoint.position.y);
-            ctx.lineTo(endPoint.position.x, endPoint.position.y);
+            ctx.moveTo(point1.position.x, point1.position.y);
+            ctx.lineTo(point2.position.x, point2.position.y);
             ctx.stroke();
         }
-    });
+    }
 }
