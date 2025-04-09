@@ -157,34 +157,12 @@ async function predict() {
 function drawPose(pose) {
     if (!pose || !pose.keypoints) return;
 
-    ctx.strokeStyle = '#00ff00';
-    ctx.lineWidth = 2;
-
-    // Draw lines between keypoints
-    const connections = [
-        ['leftShoulder', 'rightShoulder'],
-        ['leftShoulder', 'leftElbow'],
-        ['leftElbow', 'leftWrist'],
-        ['rightShoulder', 'rightElbow'],
-        ['rightElbow', 'rightWrist'],
-        ['leftShoulder', 'leftHip'],
-        ['rightShoulder', 'rightHip'],
-        ['leftHip', 'rightHip'],
-        ['leftHip', 'leftKnee'],
-        ['leftKnee', 'leftAnkle'],
-        ['rightHip', 'rightKnee'],
-        ['rightKnee', 'rightAnkle']
-    ];
-
-    for (const [p1Name, p2Name] of connections) {
-        const point1 = pose.keypoints.find(kp => kp.name === p1Name);
-        const point2 = pose.keypoints.find(kp => kp.name === p2Name);
-
-        if (point1 && point2 && point1.score > 0.3 && point2.score > 0.3) {
+    for (let keypoint of pose.keypoints) {
+        if (keypoint.score > 0.3) {
             ctx.beginPath();
-            ctx.moveTo(point1.position.x, point1.position.y);
-            ctx.lineTo(point2.position.x, point2.position.y);
-            ctx.stroke();
+            ctx.arc(keypoint.position.x, keypoint.position.y, 5, 0, 2 * Math.PI);
+            ctx.fillStyle = '#00ff00';
+            ctx.fill();
         }
     }
 }
