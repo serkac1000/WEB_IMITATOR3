@@ -158,22 +158,22 @@ function drawPose(pose) {
     if (!pose || !pose.keypoints) return;
 
     const skeleton = [
-        ['nose', 'left_eye'],
-        ['nose', 'right_eye'],
-        ['left_eye', 'left_ear'],
-        ['right_eye', 'right_ear'],
-        ['left_shoulder', 'right_shoulder'],
-        ['left_shoulder', 'left_elbow'],
-        ['right_shoulder', 'right_elbow'],
-        ['left_elbow', 'left_wrist'],
-        ['right_elbow', 'right_wrist'],
-        ['left_shoulder', 'left_hip'],
-        ['right_shoulder', 'right_hip'],
-        ['left_hip', 'right_hip'],
-        ['left_hip', 'left_knee'],
-        ['right_hip', 'right_knee'],
-        ['left_knee', 'left_ankle'],
-        ['right_knee', 'right_ankle']
+        ['nose', 'leftEye'],
+        ['nose', 'rightEye'],
+        ['leftEye', 'leftEar'],
+        ['rightEye', 'rightEar'],
+        ['leftShoulder', 'rightShoulder'],
+        ['leftShoulder', 'leftElbow'],
+        ['rightShoulder', 'rightElbow'],
+        ['leftElbow', 'leftWrist'],
+        ['rightElbow', 'rightWrist'],
+        ['leftShoulder', 'leftHip'],
+        ['rightShoulder', 'rightHip'],
+        ['leftHip', 'rightHip'],
+        ['leftHip', 'leftKnee'],
+        ['rightHip', 'rightKnee'],
+        ['leftKnee', 'leftAnkle'],
+        ['rightKnee', 'rightAnkle']
     ];
 
     ctx.strokeStyle = '#00ff00';
@@ -183,10 +183,10 @@ function drawPose(pose) {
         const point1 = pose.keypoints.find(kp => kp.name === p1);
         const point2 = pose.keypoints.find(kp => kp.name === p2);
 
-        if (point1 && point2) {
+        if (point1 && point2 && point1.score > 0.3 && point2.score > 0.3) {
             ctx.beginPath();
-            ctx.moveTo(point1.x, point1.y);
-            ctx.lineTo(point2.x, point2.y);
+            ctx.moveTo(point1.position.x, point1.position.y);
+            ctx.lineTo(point2.position.x, point2.position.y);
             ctx.stroke();
         }
     }
