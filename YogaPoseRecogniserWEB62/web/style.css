@@ -100,7 +100,7 @@ video, canvas {
 
 .pose-compare {
     width: 100%;
-    height: 65%;
+    height: 75%;
     object-fit: contain;
     border: 1px solid #ddd;
     background: #fff;
