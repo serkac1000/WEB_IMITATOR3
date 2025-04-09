@@ -144,8 +144,15 @@ button:hover {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
+.pose-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 20px 0;
+}
+
 .form-group {
-    margin: 15px 0;
+    margin: 0;
     text-align: left;
 }
 

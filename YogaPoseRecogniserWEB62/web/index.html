@@ -8,26 +8,43 @@
 <body>
     <div class="container">
         <div id="settings-page" class="page active">
-            <h1>Yoga Pose Settings</h1>
+            <h1>Pose Settings</h1>
             <div class="settings-form">
                 <div class="form-group">
                     <label>Teachable Machine Model URL:</label>
                     <input type="text" id="model-url" value="https://teachablemachine.withgoogle.com/models/gIF64n3nR/">
                 </div>
-                <div class="form-group">
-                    <label>Pose 1 Image:</label>
-                    <input type="file" id="pose1-image" accept="image/*">
-                    <img id="pose1-preview" class="pose-preview">
-                </div>
-                <div class="form-group">
-                    <label>Pose 2 Image:</label>
-                    <input type="file" id="pose2-image" accept="image/*">
-                    <img id="pose2-preview" class="pose-preview">
-                </div>
-                <div class="form-group">
-                    <label>Pose 3 Image:</label>
-                    <input type="file" id="pose3-image" accept="image/*">
-                    <img id="pose3-preview" class="pose-preview">
+                <div class="pose-grid">
+                    <div class="form-group">
+                        <label>Pose 1 Image:</label>
+                        <input type="file" id="pose1-image" accept="image/*">
+                        <img id="pose1-preview" class="pose-preview">
+                    </div>
+                    <div class="form-group">
+                        <label>Pose 2 Image:</label>
+                        <input type="file" id="pose2-image" accept="image/*">
+                        <img id="pose2-preview" class="pose-preview">
+                    </div>
+                    <div class="form-group">
+                        <label>Pose 3 Image:</label>
+                        <input type="file" id="pose3-image" accept="image/*">
+                        <img id="pose3-preview" class="pose-preview">
+                    </div>
+                    <div class="form-group">
+                        <label>Pose 4 Image:</label>
+                        <input type="file" id="pose4-image" accept="image/*">
+                        <img id="pose4-preview" class="pose-preview">
+                    </div>
+                    <div class="form-group">
+                        <label>Pose 5 Image:</label>
+                        <input type="file" id="pose5-image" accept="image/*">
+                        <img id="pose5-preview" class="pose-preview">
+                    </div>
+                    <div class="form-group">
+                        <label>Pose 6 Image:</label>
+                        <input type="file" id="pose6-image" accept="image/*">
+                        <img id="pose6-preview" class="pose-preview">
+                    </div>
                 </div>
                 <button id="save-settings">Save Settings</button>
                 <button id="start-button">Start Recognition</button>
