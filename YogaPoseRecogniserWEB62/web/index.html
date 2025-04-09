@@ -58,22 +58,19 @@
                         <canvas id="output"></canvas>
                     </div>
                 </div>
-                <div class="status-container">
+                <div class="info-section">
                     <div class="timer-box" id="timer-box">3s</div>
-                    <div class="pose-bars">
-                        <div class="expected-pose">
-                            <span>Expected:</span>
-                            <div class="pose-bar" id="expected-pose">Pose2</div>
-                        </div>
-                        <div class="current-pose">
-                            <span>Current Pose:</span>
-                            <div class="pose-bar" id="current-pose-text">Pose1</div>
-                        </div>
-                        <div class="confidence">
-                            <span>Confidence:</span>
+                    <img class="pose-compare" id="pose-compare">
+                    <div class="pose-info">
+                        <div class="pose-status">
+                            <div class="label">Expected Pose:</div>
+                            <div class="pose-bar" id="expected-pose"></div>
+                            <div class="label">Current Pose:</div>
+                            <div class="pose-bar" id="current-pose-text"></div>
+                            <div class="label">Confidence:</div>
                             <div class="confidence-container">
                                 <div class="confidence-bar" id="confidence-bar"></div>
-                                <span id="confidence-text">83.1%</span>
+                                <span id="confidence-text">0%</span>
                             </div>
                         </div>
                     </div>

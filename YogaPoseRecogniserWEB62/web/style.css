@@ -1,4 +1,3 @@
-
 body {
     margin: 0;
     padding: 20px;
@@ -21,9 +20,8 @@ body {
 
 .recognition-container {
     display: flex;
-    flex-direction: column;
-    height: 100vh;
-    background: #000;
+    gap: 20px;
+    margin-top: 20px;
 }
 
 .webcam-section {
@@ -59,7 +57,7 @@ body {
 .video-container {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 480px;
     background: #000;
 }
 
@@ -219,4 +217,11 @@ button:hover {
     max-height: 200px;
     margin: 10px 0;
     display: none;
+}
+
+.info-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
