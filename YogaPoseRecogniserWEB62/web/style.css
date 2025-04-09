@@ -117,10 +117,10 @@ video, canvas {
 
 .pose-info {
     background: white;
-    padding: 15px;
+    padding: 12px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    height: calc(50% - 80px);
+    height: calc(40% - 60px);
     overflow: auto;
 }
 
