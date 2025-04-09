@@ -184,7 +184,7 @@ async function predict() {
     confidenceBar.style.width = `${thresholdPercent}%`;
     confidenceText.textContent = `${thresholdPercent}%`;
 
-    if (maxConfidence > poseThreshold && bestPose === expectedPose) {
+    if (expectedPoseConfidence > poseThreshold && bestPose === expectedPose) {
         if (lastPoseTime === 0) {
             lastPoseTime = Date.now();
         }
