@@ -151,16 +151,21 @@ async function predict() {
         drawPose(pose);
     }
 
-    let maxConfidence = 0;
+    const expectedPose = poseOrder[currentPoseIndex];
+    let expectedPoseConfidence = 0;
     let bestPose = '';
+    let maxConfidence = 0;
+
     for (let i = 0; i < maxPredictions; i++) {
-        if (prediction[i].probability > maxConfidence) {
-            maxConfidence = prediction[i].probability;
-            bestPose = prediction[i].className;
+        const currentPrediction = prediction[i];
+        if (currentPrediction.className === expectedPose) {
+            expectedPoseConfidence = currentPrediction.probability;
+        }
+        if (currentPrediction.probability > maxConfidence) {
+            maxConfidence = currentPrediction.probability;
+            bestPose = currentPrediction.className;
         }
     }
-
-    const expectedPose = poseOrder[currentPoseIndex];
     
     // Update pose image
     const poseCompare = document.getElementById('pose-compare');
@@ -175,7 +180,7 @@ async function predict() {
     expectedPoseEl.textContent = expectedPose;
     currentPoseEl.textContent = bestPose;
     
-    const thresholdPercent = Math.min(100, (maxConfidence / poseThreshold * 100)).toFixed(2);
+    const thresholdPercent = (expectedPoseConfidence * 100).toFixed(2);
     confidenceBar.style.width = `${thresholdPercent}%`;
     confidenceText.textContent = `${thresholdPercent}%`;
 
