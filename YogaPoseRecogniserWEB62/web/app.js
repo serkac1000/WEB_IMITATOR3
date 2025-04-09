@@ -5,6 +5,7 @@ let currentPoseImage = null;
 let currentPoseIndex = 0;
 let poseHoldTimer = 3;
 let lastPoseTime = 0;
+let poseThreshold = 0.8; // Default 80%
 const poseOrder = ['Pose1', 'Pose2', 'Pose3', 'Pose4', 'Pose5', 'Pose6'];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -22,6 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (savedModelUrl) {
         document.getElementById('model-url').value = savedModelUrl;
     }
+    
+    const savedThreshold = localStorage.getItem('pose_threshold');
+    if (savedThreshold) {
+        document.getElementById('pose-threshold').value = savedThreshold;
+        poseThreshold = savedThreshold / 100;
+    }
 
     poseOrder.forEach(poseName => {
         const savedImage = localStorage.getItem(`pose_${poseName}`);
@@ -36,7 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function saveSettings() {
     const modelUrl = document.getElementById('model-url').value;
+    const threshold = document.getElementById('pose-threshold').value;
     localStorage.setItem('model_url', modelUrl);
+    localStorage.setItem('pose_threshold', threshold);
+    poseThreshold = threshold / 100;
 
     poseOrder.forEach(poseName => {
         const poseImage = poseImages.get(poseName);
@@ -146,7 +156,7 @@ async function predict() {
     confidenceBar.style.width = `${confidencePercent}%`;
     confidenceText.textContent = `${confidencePercent}%`;
 
-    if (maxConfidence > 0.8 && bestPose === expectedPose) {
+    if (maxConfidence > poseThreshold && bestPose === expectedPose) {
         if (lastPoseTime === 0) {
             lastPoseTime = Date.now();
         }
