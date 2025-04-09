@@ -50,7 +50,7 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
 def open_browser():
     try:
         print("Attempting to open browser...")
-        url = f"http://0.0.0.0:{PORT}"
+        url = f"http://localhost:{PORT}"  # Use localhost instead of 0.0.0.0
         time.sleep(1)
         webbrowser.open(url)
         print("Browser opened successfully.")
@@ -64,8 +64,8 @@ def start_server():
         print("Welcome to the Yoga Pose Recognition Server")
         print("Your server is running successfully!")
         print(f"Serving on port {PORT} from {web_dir}")
-        print("Visit http://0.0.0.0:81/ to access the app.")
-        print("Visit http://0.0.0.0:81/shutdown to stop the server.")
+        print("Visit http://localhost:81/ to access the app.")
+        print("Visit http://localhost:81/shutdown to stop the server.")
         threading.Thread(target=open_browser, daemon=True).start()
         httpd.serve_forever()
     except KeyboardInterrupt:
