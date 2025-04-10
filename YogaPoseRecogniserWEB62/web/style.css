@@ -220,31 +220,57 @@ button:hover {
     margin: 10px 0;
 }
 
+.settings-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.form-group-inline {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.form-group-inline label {
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+.form-group-inline input {
+    width: 60px;
+    padding: 2px 4px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 10px;
+}
+
 .form-group {
     margin: 0;
     text-align: left;
-    font-size: 12px;
+    font-size: 11px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 3px;
-    font-size: 11px;
+    margin-bottom: 2px;
+    font-size: 10px;
 }
 
 .form-group input[type="text"],
 .form-group input[type="number"] {
     width: 100%;
-    padding: 4px;
+    padding: 2px 4px;
     border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 12px;
+    border-radius: 3px;
+    font-size: 10px;
 }
 
 .pose-preview {
-    max-width: 120px;
-    max-height: 120px;
-    margin: 5px 0;
+    max-width: 80px;
+    max-height: 80px;
+    margin: 3px 0;
     display: none;
 }
 

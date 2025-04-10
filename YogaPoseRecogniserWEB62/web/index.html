@@ -13,13 +13,15 @@
                     <label>Teachable Machine Model URL:</label>
                     <input type="text" id="model-url" value="https://teachablemachine.withgoogle.com/models/gIF64n3nR/">
                 </div>
-                <div class="form-group">
-                    <label>Pose Detection Threshold (%):</label>
-                    <input type="number" id="pose-threshold" min="0" max="100" value="80" step="1">
-                </div>
-                <div class="form-group">
-                    <label>Pose Hold Timer (seconds):</label>
-                    <input type="number" id="pose-timer" min="0" max="3" value="3" step="1">
+                <div class="settings-row">
+                    <div class="form-group-inline">
+                        <label>Threshold (%):</label>
+                        <input type="number" id="pose-threshold" min="0" max="100" value="80" step="1">
+                    </div>
+                    <div class="form-group-inline">
+                        <label>Hold Timer (s):</label>
+                        <input type="number" id="pose-timer" min="0" max="3" value="3" step="1">
+                    </div>
                 </div>
                 <div class="pose-grid">
                     <div class="form-group">
