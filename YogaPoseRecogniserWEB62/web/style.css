@@ -205,43 +205,58 @@ button:hover {
 
 .settings-form {
     background: white;
-    padding: 20px;
-    border-radius: 10px;
+    padding: 12px;
+    border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    font-size: 14px;
+    font-size: 12px;
+    max-height: calc(100vh - 100px);
+    overflow: hidden;
 }
 
 .pose-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin: 20px 0;
+    gap: 10px;
+    margin: 10px 0;
 }
 
 .form-group {
     margin: 0;
     text-align: left;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
+    font-size: 11px;
 }
 
-.form-group input[type="text"] {
+.form-group input[type="text"],
+.form-group input[type="number"] {
     width: 100%;
-    padding: 8px;
+    padding: 4px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .pose-preview {
-    max-width: 200px;
-    max-height: 200px;
-    margin: 10px 0;
+    max-width: 120px;
+    max-height: 120px;
+    margin: 5px 0;
     display: none;
+}
+
+button {
+    padding: 6px 12px;
+    font-size: 12px;
+    margin: 5px 0;
+}
+
+h1 {
+    font-size: 20px;
+    margin: 10px 0;
 }
 
 .info-section {
